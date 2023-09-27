@@ -1,166 +1,156 @@
-﻿internal class Program
+﻿using System; 
+internal class Program
 {
-    private static void Main(string[] args)
+    static int Sum(int n)
     {
-        // 1-print "Hello World"
-        Console.WriteLine("Hello World");
-
-        Console.WriteLine("-----------------------------------------------------------------------------");
-        // 2-print ASCII number of a char
-        Console.WriteLine("enter your char");
-        char alphapitic = char.Parse(Console.ReadLine());
-        Console.WriteLine("you enter " + alphapitic + " the ascii is :-  " + Convert.ToInt32(alphapitic));
-
-        Console.WriteLine("-----------------------------------------------------------------------------");
-        // 3-print a float number entered by the user
-        Console.WriteLine("enter float number");
-        float fNumber = float.Parse(Console.ReadLine());
-        Console.WriteLine("you enter " + fNumber);
-
-        Console.WriteLine("-----------------------------------------------------------------------------");
-        // 4- add two integers
-
-        Console.WriteLine("enter the first number");
-        int number_1 = int.Parse(Console.ReadLine());
-
-        Console.WriteLine("enter the second number");
-        int number_2 = int.Parse(Console.ReadLine());
-
-        Console.WriteLine("the sum of the two numbers you entered is :- " + (number_1 + number_2));
-
-        Console.WriteLine("-----------------------------------------------------------------------------");
-
-        // 5- print Hexa of a number
-        Console.WriteLine("enter your number");
-        int HNumber = int.Parse(Console.ReadLine());
-
-        Console.WriteLine("you enter " + HNumber + " the hexa is :- " + HNumber.ToString("X"));
-
-        Console.WriteLine("-----------------------------------------------------------------------------");
-
-        // 6- compute Quotient and Remainder
-        Console.WriteLine("enter the two numbers");
-
-        int dividend = int.Parse(Console.ReadLine());
-        int divisor = int.Parse(Console.ReadLine());
-
-        int quotient = dividend / divisor;
-        int remainder = dividend % divisor;
-
-        Console.WriteLine(" The Quotient: " + quotient);
-        Console.WriteLine(" The Remainder: " + remainder);
-
-        Console.WriteLine("-----------------------------------------------------------------------------");
-
-        // 7-  Check Whether a Number is Even or Odd
-        Console.WriteLine("enter the numbers");
-
-        int checkedNumber = int.Parse(Console.ReadLine());
-        if (checkedNumber % 2 == 0)
+        
+        if (n == 1)
         {
-            Console.WriteLine("the number you are entered is EVEN");
+            return 1;
         }
+        
         else
         {
-            Console.WriteLine("the number you are entered is ODD");
-
+            return n + Sum(n - 1);
         }
-        Console.WriteLine("-----------------------------------------------------------------------------");
-
-        // 8- 
-        Console.WriteLine("enter the number1");
-        int lnumber1 = int.Parse(Console.ReadLine());
-        Console.WriteLine("enter the number1");
-        int lnumber2 = int.Parse(Console.ReadLine());
-        Console.WriteLine("enter the number1");
-        int lnumber3 = int.Parse(Console.ReadLine());
-        int largeNumber;
-
-        if (lnumber1 > lnumber2 && lnumber1 > lnumber3)
+    }
+    static int GCD(int a, int b)
+    {
+        
+        if (b == 0)
         {
-            largeNumber = lnumber1;
+            return a;
         }
-        else if (lnumber2 > lnumber1 && lnumber2 > lnumber3)
-        {
-            largeNumber = lnumber2;
-        }
+        
         else
         {
-            largeNumber = lnumber3;
+            return GCD(b, a % b);
         }
+    }
 
-        Console.WriteLine("the largest number of three numbers " + largeNumber);
-        Console.WriteLine("-----------------------------------------------------------------------------");
+    static void Main(string[] args)
+    {
+        // 1- •	Program to add two matrix [2D Array] and put the result in a third one, then print the result
 
-        //-9
-        Console.Write("Enter your degree:- ");
-        string degree = Console.ReadLine();
+        int[,] matrix_one = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        int[,] matrix_two = new int[,] { { 10,11,12 }, { 13,14,15 }, { 16,17,18} };
 
-        string grade;
+        int numRows = matrix_one.GetLength(0);
+        int numCols = matrix_one.GetLength(1);
 
-        switch (degree)
+        int[,] matrix_three = new int[numRows, numCols];
+
+        for (int i = 0; i < numRows; i++)
         {
-            case "A":
-                grade = "Excellent";
-                break;
-            case "B":
-                grade = "Very Good";
-                break;
-            case "C":
-                grade = "Good";
-                break;
-            case "D":
-                grade = "Fair";
-                break;
-            case "E":
-                grade = "Failed";
-                break;
-            default:
-                grade = "not found degree";
-                break;
+            for (int j = 0; j < numCols; j++)
+            {
+                matrix_three[i, j] = matrix_one[i, j] + matrix_two[i, j];
+            }
         }
 
-        Console.WriteLine("Grade: " + grade);
-        Console.WriteLine("-----------------------------------------------------------------------------");
-
-        // 10-Program to print total of numbers when it gets to 100. 
-        Console.WriteLine("enter the number");
-        int cnumber = int.Parse(Console.ReadLine());
-
-        while (cnumber < 100)
+        for (int i = 0; i < numRows; i++)
         {
-            Console.WriteLine(cnumber);
-            cnumber++;
+            for (int j = 0; j < numCols; j++)
+            {
+                Console.Write($" {matrix_three[i, j]}  ");
+            }
+            Console.WriteLine("\n");
         }
-        Console.WriteLine("-----------------------------------------------------------------------------");
+        //--------------------------------------------------------------------------------------
+        // 2 •	Program to find Sum & Average of 2D Array.
+        int[,] avg_matrix = new int[,] { { 1, 2, 3 }, { 4, 5, 6 }, { 7, 8, 9 } };
+        
+        int count = avg_matrix.GetLength(0) * avg_matrix.GetLength(1);
+        int sum = 0;
+        int avg = 0;
 
-        // 11- 11.	Program to Generate Multiplication Table 
-
-
-        Console.WriteLine("enter the number");
-        int number = int.Parse(Console.ReadLine());
-
-        Console.WriteLine("Multiplication Table for " + number + ":");
-
-        for (int i = 1; i <= 10; i++)
+        for (int i = 0; i < avg_matrix.GetLength(0); i++)
         {
-            int result = number * i;
-            Console.WriteLine(number + " * " + i + " = " + result);
+            for (int j = 0; j < avg_matrix.GetLength(1); j++)
+            {
+                sum += avg_matrix[i, j];
+            }
         }
 
-        //12-Program to Check Whether a Character is an Alphabet or not
+        avg = sum / count;
+        Console.WriteLine($"the sum of matrix is = {sum} and the average is {avg}");
 
-        Console.Write("Enter a your character: ");
-        char mychar = Console.ReadKey().KeyChar;
-        Console.WriteLine();
-
-        if (Char.IsLetter(mychar))
+        //----------------------------------------------------------------------------------------
+        // 3 •	Program to Find the Frequency of Characters in a String
+        string myString = "welcome on ITI";
+        Dictionary<char, int> freq = new Dictionary<char, int>();
+        foreach (var item in myString)
         {
-            Console.WriteLine(mychar + " is an alphabet.");
+            if (freq.ContainsKey(item))
+            {
+                freq[item]++;
+            }
+            else
+            {
+                freq.Add(item, 1);
+            }
         }
-        else
+
+        foreach (var item in freq)
         {
-            Console.WriteLine(mychar + " is not an alphabet.");
+            Console.WriteLine($"the char is {item.Key} and its freq is {item.Value}");
         }
+
+        //4 •	Program to Remove all Characters in a String Except Alphabet
+        string myclearstring = "welcome on ITI";
+        List<string> myresualt = new List<string>();
+
+        foreach (var item in myclearstring)
+        {
+            if (char.IsUpper(item)|| char.IsLower(item))
+            {
+                myresualt.Add(item.ToString());
+            }           
+        }
+        foreach (var item in myresualt)
+        {
+            Console.WriteLine(item);
+        }
+
+        //5 •	Write a function takes array as parameter, and returns the largest number
+        int largerNum(int[] arr)
+        {
+            int larger = 0;
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                if (arr[i] > larger)
+                {
+                    larger = arr[i];
+                }
+            }
+            return larger;
+        }
+        int[] arr = { 5, 12, 6, 8, 44, 92, 100, 500 };
+        int larger = largerNum(arr);
+
+        //6•	Program that takes an array of integers and pass that array to a function to print array
+        //values after multiplying them to 10. 
+        int[] multirNum(int[] arr)
+        {
+            int[] ints = new int[arr.Length];   
+            for (int i = 0; i < arr.Length - 1; i++)
+            {
+                ints[i] = arr[i] * 10;
+            }
+            return ints;
+        }
+        int[] nums = {5,2,3,6,7};
+        int[] multinum = multirNum(nums);
+        foreach (var item in multinum)
+        {
+            Console.WriteLine(item);
+        }
+
+        //7•	Make function that calculate the sum of numbers from 1 to n using recursion.
+        Console.WriteLine(Sum(11));
+
+        //8 Console.WriteLine(GCD(24, 36));
+        Console.WriteLine(GCD(24, 36));
+
     }
 }
